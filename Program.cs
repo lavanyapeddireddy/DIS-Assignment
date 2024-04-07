@@ -1,8 +1,12 @@
+using Microsoft.VisualBasic;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Text;
 using System.Xml.Linq;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace MyAssignment
 {
@@ -114,8 +118,8 @@ namespace MyAssignment
         }
 
         // Question 1: Remove Duplicates from Sorted Array
-        // Self-Reflection: This exercise helped me understand how to work with lists of data and how to use if-else statements in programming.
-        public static int RemoveDuplicates(int[] nums)
+        // Self-Reflection: I learned about manipulating arrays effectively and the significance of concise exception handling to ensure code reliability.
+            public static int RemoveDuplicates(int[] nums)
         {
             try
             {
@@ -143,7 +147,7 @@ namespace MyAssignment
 
 
         // Question 2: Move Zeroes
-        // Self-Reflection: Doing this task helped me learn more about loops, if-else statements, and changing lists of numbers.
+        // Self-Reflection:Through this task I learned how to move zeros to the end of an array while keeping other elements in order, and why handling errors properly is crucial for reliable code.
         public static IList<int> MoveZeroes(int[] nums)
         {
             try
@@ -181,7 +185,7 @@ namespace MyAssignment
 
 
         // Question 3: 3Sum
-        // Self-Reflection: This problem made me better at arranging lists, sorting them, and using loops inside other loops.
+        // Self-Reflection: This task made me to find sets of three numbers that add up to zero in a sorted list, without repeating the same combination, improving my understanding of array manipulation..
         public static IList<IList<int>> ThreeSum(int[] nums)
         {
             Array.Sort(nums);
@@ -216,7 +220,7 @@ namespace MyAssignment
 
 
         // Question 4: Max Consecutive Ones
-        // Self-Reflection: This task helped me get better at using loops, if-else statements, and going through lists of data.
+        // Self-Reflection: This task helped me count the longest sequence of ones in an array, improving my grasp of loops and keeping track of variables.
         public static int FindMaxConsecutiveOnes(int[] nums)
         {
             try
@@ -248,7 +252,7 @@ namespace MyAssignment
 
 
         // Question 5: Binary to Decimal Conversion
-        // Self-Reflection: This problem  helped me to understand better how to do math calculations and repeat steps over and over again.
+        // Self-Reflection: Through this code, I learned how to convert a binary number to its decimal equivalent using basic arithmetic operations and iterative processing, enhancing my understanding of number systems and loops.
         public static int BinaryToDecimal(int num)
         {
             try
@@ -274,7 +278,7 @@ namespace MyAssignment
 
 
         // Question 6: Maximum Gap
-        // Self-Reflection: This activity broadened my understanding of arranging lists, going through them, and finding the biggest differences..
+        // Self-Reflection:Through this code, I learned how to find the maximum difference between successive elements in a sorted array, aiding in understanding basic array manipulation and finding extremities within data.
         public static int MaximumGap(int[] nums)
         {
             try
@@ -301,7 +305,7 @@ namespace MyAssignment
 
 
         // Question 7: Largest Perimeter Triangle
-        // Self-Reflection: This task helped me get better at using loops, checking conditions, and sorting lists of numbers.
+        // Self-Reflection: Through this code, I learned how to determine the largest perimeter possible from a given set of side lengths, practicing array sorting and iteration techniques to find the optimal solution.
         public static int LargestPerimeter(int[] sideLengths)
         {
             try
@@ -327,7 +331,7 @@ namespace MyAssignment
 
 
         // Question 8: Remove Occurrences of a Substring
-        // Self-Reflection: This activity helped me get better at playing around with words and doing things over and over again.
+        // Self-Reflection: This activity helped me to learn to delete all instances of a word from a sentence and how to turn lists and arrays into readable strings.
         public static string RemoveOccurrences(string inputString, string substring)
         {
             try
