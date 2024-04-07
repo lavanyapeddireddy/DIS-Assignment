@@ -1,6 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
+using System.Xml.Linq;
 
 namespace MyAssignment
 {
@@ -120,18 +122,18 @@ namespace MyAssignment
                 // Check if the array is empty
                 if (nums.Length == 0) return 0;
 
-                int index = 0;
-                for (int i = 1; i < nums.Length; i++)
+                int uniqueIndex = 0;
+                for (int currentIndex = 1; currentIndex < nums.Length; currentIndex++)
                 {
-                    // If current element is different from previous, increment index and replace value
-                    if (nums[i] != nums[index])
+                    // If the current item is not the same as the one before it, move to the next spot and change what's there.
+                    if (nums[currentIndex] != nums[uniqueIndex])
                     {
-                        index++;
-                        nums[index] = nums[i];
+                        uniqueIndex++;
+                        nums[uniqueIndex] = nums[currentIndex];
                     }
                 }
-                // Return length of unique numbers
-                return index + 1;
+                // Return the count of distinct numbers.
+                return uniqueIndex + 1;
             }
             catch (Exception)
             {
@@ -146,25 +148,25 @@ namespace MyAssignment
         {
             try
             {
-                // Check if the array is null or empty
+                // Checking the array is null or empty
                 if (nums == null || nums.Length == 0)
                     return new List<int>();
 
                 int zeroCount = 0;
 
-                // Iterate through the array
-                for (int i = 0; i < nums.Length; i++)
+                // Go through the list one item at a time.
+                for (int currentIndex = 0; currentIndex < nums.Length; currentIndex++)
                 {
-                    // Count zeroes
-                    if (nums[i] == 0)
+                    // Counting the zeroes
+                    if (nums[currentIndex] == 0)
                     {
                         zeroCount++;
                     }
-                    // Move non-zero elements to the left
+                    // Shift all non-zero elements to the beginning.
                     else if (zeroCount > 0)
                     {
-                        nums[i - zeroCount] = nums[i];
-                        nums[i] = 0;
+                        nums[currentIndex - zeroCount] = nums[currentIndex];
+                        nums[currentIndex] = 0;
                     }
                 }
 
@@ -177,6 +179,7 @@ namespace MyAssignment
         }
 
 
+
         // Question 3: 3Sum
         // Self-Reflection: This problem made me better at arranging lists, sorting them, and using loops inside other loops.
         public static IList<IList<int>> ThreeSum(int[] nums)
@@ -184,16 +187,18 @@ namespace MyAssignment
             Array.Sort(nums);
             List<IList<int>> result = new List<IList<int>>();
 
-            for (int i = 0; i < nums.Length - 2; i++)
+            for (int firstIndex = 0; firstIndex < nums.Length - 2; firstIndex++)
             {
-                if (i > 0 && nums[i] == nums[i - 1]) continue;
-                int left = i + 1, right = nums.Length - 1;
+                if (firstIndex > 0 && nums[firstIndex] == nums[firstIndex - 1]) continue;
+                int left = firstIndex + 1, right = nums.Length - 1;
                 while (left < right)
                 {
-                    int sum = nums[i] + nums[left] + nums[right];
+                    // Calculate the sum of the current triplet
+                    int sum = nums[firstIndex] + nums[left] + nums[right];
                     if (sum == 0)
                     {
-                        result.Add(new List<int> { nums[i], nums[left], nums[right] });
+                        result.Add(new List<int> { nums[firstIndex], nums[left], nums[right] });
+                        // Skip duplicates for the second and third elements
                         while (left < right && nums[left] == nums[left + 1]) left++;
                         while (left < right && nums[right] == nums[right - 1]) right--;
                         left++;
@@ -209,30 +214,29 @@ namespace MyAssignment
             return result;
         }
 
+
         // Question 4: Max Consecutive Ones
         // Self-Reflection: This task helped me get better at using loops, if-else statements, and going through lists of data.
-
-
         public static int FindMaxConsecutiveOnes(int[] nums)
         {
             try
             {
                 if (nums == null || nums.Length == 0)
                     return 0;
-
-                int maxCount = 0;
-                int count = 0;
+                // Initialize variables to keep track of the maximum consecutive ones and the current count of consecutive ones
+                int maxConsecutiveOnes = 0;
+                int currentConsecutiveOnes = 0;
                 foreach (var num in nums)
                 {
                     if (num == 1)
                     {
-                        count++;
-                        maxCount = Math.Max(maxCount, count);
+                        currentConsecutiveOnes++;
+                        maxConsecutiveOnes = Math.Max(maxConsecutiveOnes, currentConsecutiveOnes);
                     }
                     else
-                        count = 0;
+                        currentConsecutiveOnes = 0;
                 }
-                return maxCount;
+                return maxConsecutiveOnes;
             }
             catch (Exception)
             {
@@ -240,21 +244,26 @@ namespace MyAssignment
             }
         }
 
+
+
+
         // Question 5: Binary to Decimal Conversion
         // Self-Reflection: This problem  helped me to understand better how to do math calculations and repeat steps over and over again.
-        public static int BinaryToDecimal(int binary)
+        public static int BinaryToDecimal(int num)
         {
             try
             {
                 int decimalNumber = 0;
                 int baseValue = 1;
-                while (binary > 0)
+                while (num > 0)
                 {
-                    int remainder = binary % 10;
+                    int remainder = num % 10;
+                    // Update the decimal number by adding the contribution of the current digit.
                     decimalNumber += remainder * baseValue;
-                    binary /= 10;
+                    num /= 10;
                     baseValue *= 2;
                 }
+                // Return the decimal representation of the binary input.
                 return decimalNumber;
             }
             catch (Exception)
@@ -263,22 +272,26 @@ namespace MyAssignment
             }
         }
 
+
         // Question 6: Maximum Gap
         // Self-Reflection: This activity broadened my understanding of arranging lists, going through them, and finding the biggest differences..
         public static int MaximumGap(int[] nums)
         {
             try
             {
+                // Check if the input array is null or has less than 2 elements.
+                // If so, there are no differences to calculate, return 0.
                 if (nums == null || nums.Length < 2)
                     return 0;
 
                 Array.Sort(nums);
-                int maxGap = 0;
+                // Initialize a variable to store the maximum difference
+                int maxDifference = 0;
                 for (int i = 0; i < nums.Length - 1; i++)
                 {
-                    maxGap = Math.Max(maxGap, nums[i + 1] - nums[i]);
+                    maxDifference = Math.Max(maxDifference, nums[i + 1] - nums[i]);
                 }
-                return maxGap;
+                return maxDifference;
             }
             catch (Exception)
             {
@@ -286,28 +299,24 @@ namespace MyAssignment
             }
         }
 
+
         // Question 7: Largest Perimeter Triangle
         // Self-Reflection: This task helped me get better at using loops, checking conditions, and sorting lists of numbers.
-
-
-
-
-
-
-
-        public static int LargestPerimeter(int[] nums)
+        public static int LargestPerimeter(int[] sideLengths)
         {
             try
             {
-                if (nums == null || nums.Length < 3)
+                if (sideLengths == null || sideLengths.Length < 3)
                     return 0;
 
-                Array.Sort(nums);
-                for (int i = nums.Length - 1; i >= 2; i--)
+                Array.Sort(sideLengths);
+                // Iterate through the sorted array from the largest elements to find the largest perimeter.
+                for (int i = sideLengths.Length - 1; i >= 2; i--)
                 {
-                    if (nums[i - 2] + nums[i - 1] > nums[i])
-                        return nums[i - 2] + nums[i - 1] + nums[i];
+                    if (sideLengths[i - 2] + sideLengths[i - 1] > sideLengths[i])
+                        return sideLengths[i - 2] + sideLengths[i - 1] + sideLengths[i];
                 }
+                // If no valid perimeter is found, return 0.
                 return 0;
             }
             catch (Exception)
@@ -316,18 +325,22 @@ namespace MyAssignment
             }
         }
 
+
         // Question 8: Remove Occurrences of a Substring
         // Self-Reflection: This activity helped me get better at playing around with words and doing things over and over again.
-        public static string RemoveOccurrences(string s, string part)
+        public static string RemoveOccurrences(string inputString, string substring)
         {
             try
             {
-                while (s.Contains(part))
+                // Iterate through the input string while it contains the specified substring.
+                // Remove each leftmost occurrence of the substring.
+                while (inputString.Contains(substring))
                 {
-                    int index = s.IndexOf(part);
-                    s = s.Remove(index, part.Length);
+                    int index = inputString.IndexOf(substring);
+                    inputString = inputString.Remove(index, substring.Length);
                 }
-                return s;
+                // Return the modified string after removing all occurrences of the substring.
+                return inputString;
             }
             catch (Exception)
             {
@@ -375,6 +388,5 @@ namespace MyAssignment
 
             return result;
         }
-
     }
-}
+    }
